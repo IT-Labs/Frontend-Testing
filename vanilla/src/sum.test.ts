@@ -31,7 +31,8 @@ describe('sum', () => {
   });
 
   describe('NaN', () => {
-    it('should be weird with NaN', () => {
+    // it() === test()
+    test('should be weird with NaN', () => {
       // Arrange
       const a = 2;
       const b = NaN;
