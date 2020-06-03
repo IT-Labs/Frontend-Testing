@@ -1,4 +1,5 @@
 import { Todo } from './activeTodos';
+import axios from 'axios';
 
 export const getTodos: () => Todo[] = () => {
   return [
@@ -6,4 +7,9 @@ export const getTodos: () => Todo[] = () => {
     {id: '1', title: 'abc', isActive: true},
     {id: '2', title: 'efg', isActive: false},
   ]
+}
+
+export const getTodosAsync: () => Promise<Todo[]> = () => {
+  return axios.get('https://jsonplaceholder.typicode.com/posts')
+    .then(res => res.data);
 }
