@@ -1,6 +1,6 @@
 import { Todo } from "./activeTodos";
 
-const VanillaTodoItem = (todo: Todo, container: HTMLDivElement) => {
+const VanillaTodoItem = (todo: Todo, container: HTMLDivElement, onMarkActive?: () => void) => {
   const root = document.createElement('div');
   const removeBtn = document.createElement('button');
   removeBtn.innerText = 'Remove';
@@ -22,6 +22,13 @@ const VanillaTodoItem = (todo: Todo, container: HTMLDivElement) => {
 
   root.appendChild(text);
   root.appendChild(removeBtn);
+
+  const activeBtn = document.createElement('button');
+  activeBtn.setAttribute('id', 'setActiveBtn');
+  activeBtn.addEventListener('click', () => {
+    onMarkActive();
+  });
+  root.appendChild(activeBtn);
 
   container.appendChild(root);
 }

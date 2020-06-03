@@ -35,7 +35,7 @@ describe('vanillaTodoItem', () => {
 
     VanillaTodoItem(todo, container);
 
-    const btn = container.querySelector('button');
+    const btn = document.getElementById('removeBtn');
     expect(btn).toBeTruthy();
   });
 
@@ -50,10 +50,28 @@ describe('vanillaTodoItem', () => {
 
     expect(container.innerHTML).not.toBe('');
 
-    const btn = container.querySelector('button');
+    const btn = document.getElementById('removeBtn');
 
     btn.dispatchEvent(new MouseEvent('click'));
 
     expect(container.innerHTML).toBe('');
+  });
+
+  describe('spies', () => {
+    it('should call onMarkActive callback on btn click', () => {
+      const todo: Todo = {
+        title: 'Wash the dishes',
+        id: '1',
+        isActive: true
+      };
+      const onMarkActive = jest.fn();
+  
+      VanillaTodoItem(todo, container, onMarkActive);
+  
+      const markActiveBtn = document.getElementById('setActiveBtn');
+      markActiveBtn.dispatchEvent(new MouseEvent('click'));
+  
+      expect(onMarkActive).toHaveBeenCalled();
+    });
   });
 });
