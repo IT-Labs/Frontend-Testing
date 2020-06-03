@@ -2,6 +2,7 @@ import { Todo } from "./activeTodos";
 
 const VanillaTodoItem = (todo: Todo, container: HTMLDivElement, onMarkActive?: () => void) => {
   const root = document.createElement('div');
+  root.setAttribute('data-type', 'todo')
   const removeBtn = document.createElement('button');
   removeBtn.innerText = 'Remove';
   removeBtn.setAttribute('id', 'removeBtn');
