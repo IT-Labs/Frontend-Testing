@@ -8,4 +8,4 @@ export const getTodos = jest.fn().mockReturnValue([
 export const getTodosAsync = jest.fn().mockResolvedValue([
   {id: '1', title: 'my first item', isActive: false},
   {id: '2', title: 'my second todo', isActive: false}
-])
+]);

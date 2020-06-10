@@ -4,13 +4,16 @@ import { getTodos } from './todoService';
 
 // jest.mock('./todoService', () => {
 //   return {
-//     getTodos: () => [{id: '1', title: 'my first item', isActive: false}] as Todo[]
+//     getTodos: () => [
+//       {id: '1', title: 'my first item', isActive: false}
+//     ] as Todo[]
 //   }
 // });
 
 // jest.mock('./todoService', () => {
 //   return {
-//     getTodos: jest.fn()
+//     getTodos: jest.fn(),
+//     getTodosAsync: jest.fn(),
 //   }
 // });
 
@@ -21,7 +24,9 @@ describe('TodosList', () => {
 
   it('should render single todo', () => {
     console.log(getTodos);
-    mockGetTodos.mockReturnValue([{id: '1', title: 'my first item', isActive: false}] as Todo[]);
+    mockGetTodos.mockReturnValue([
+      {id: '1', title: 'my first item', isActive: false}
+    ] as Todo[]);
     const container = document.createElement('div');
     document.body.appendChild(container);
 
