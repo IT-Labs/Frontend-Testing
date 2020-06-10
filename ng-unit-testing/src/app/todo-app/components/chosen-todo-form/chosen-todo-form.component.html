@@ -1,0 +1,20 @@
+<form (submit)="onSubmit()" [formGroup]="form">
+  <h2>Update Todo</h2>
+  <div>
+    <label for="title" >Title</label>
+  </div>
+  <div>
+    <input
+      type="text"
+      id="title"
+      formControlName="title"
+      />
+  </div>
+  <div class="error">
+    {{form.get('title').touched && form.get('title').invalid ? 'Field is required' : '' }}
+  </div>
+  <div>
+    <button type="submit">Save</button>
+    <button type="button" (click)="onCancelUpdate.emit()">Cancel</button>
+  </div>
+</form>

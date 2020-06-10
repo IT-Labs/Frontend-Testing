@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="header">
+    <h1>Todo App</h1>
+    <button (click)="onAdd.emit()">
+      Add
+    </button>
+  </div>
+  <app-todo-list
+    [todos]="todos"
+    (onEdit)="onEdit.emit($event)"
+    (onRemove)="onRemove.emit($event)">
+  </app-todo-list>
+  <div *ngIf="chosenTodo">
+    <app-chosen-todo-form
+      [chosenTodo]="chosenTodo"
+      (onUpdate)="onUpdate.emit($event)"
+      (onCancelUpdate)="onCancelUpdate.emit()">
+    </app-chosen-todo-form>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+label {
+  margin-right: 5px;
+}
+
+input {
+  margin-bottom: 5px;
+}
+
+.error {
+  color: red;
+}
+
+button {
+  margin-right: 5px;
+}

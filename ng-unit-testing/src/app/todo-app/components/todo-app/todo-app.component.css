@@ -1,0 +1,11 @@
+.container {
+  margin-top: 30px;
+  margin: auto;
+  max-width: 800px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}

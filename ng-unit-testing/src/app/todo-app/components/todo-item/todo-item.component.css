@@ -1,0 +1,10 @@
+.remove-btn {
+  margin-left: 10px;
+}
+
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}

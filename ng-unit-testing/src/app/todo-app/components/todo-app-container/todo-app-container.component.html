@@ -1,0 +1,9 @@
+<app-todo-app
+  [todos]="todoService.todos | async"
+  [chosenTodo]="todoService.chosenTodo | async"
+  (onAdd)="todoService.onAdd()"
+  (onCancelUpdate)="todoService.cancelUpdate()"
+  (onEdit)="todoService.setChosenTodo($event)"
+  (onRemove)="todoService.remove($event)"
+  (onUpdate)="todoService.update($event)">
+</app-todo-app>
