@@ -12,29 +12,6 @@ describe('TodoItemComponent', () => {
     createdAt: '2020-06-02T12:20:56.512Z',
   } as Todo);
 
-  describe('native angular TestBed', () => {
-    let component: TodoItemComponent;
-    let fixture: ComponentFixture<TodoItemComponent>;
-
-    beforeEach(async(() => {
-      TestBed.configureTestingModule({
-        declarations: [ TodoItemComponent ]
-      })
-      .compileComponents();
-    }));
-
-    beforeEach(() => {
-      fixture = TestBed.createComponent(TodoItemComponent);
-      component = fixture.componentInstance;
-      component.todo = getTodo();
-      fixture.detectChanges();
-    });
-
-    it('should create', () => {
-      expect(component).toBeTruthy();
-    });
-  });
-
   describe('spectator', () => {
     const getInputs = (props: Partial<TodoItemComponent> = {}) => {
       return {
