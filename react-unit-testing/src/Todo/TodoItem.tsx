@@ -44,7 +44,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
         </span>
       </div>
       <div>
-        <button onClick={handleEdit}>Edit</button>
+        <button onClick={handleEdit} data-editbtn>Edit</button>
         <button onClick={handleRemove} style={{ marginLeft: '10px'}}>Remove</button>
       </div>
     </div>
