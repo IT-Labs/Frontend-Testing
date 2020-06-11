@@ -23,7 +23,6 @@ describe('TodoItemComponent', () => {
     const getComponent = (props: Partial<TodoItemComponent> = {}) => {
       return createComponent({
         props,
-        detectChanges: true,
        });
     }
 

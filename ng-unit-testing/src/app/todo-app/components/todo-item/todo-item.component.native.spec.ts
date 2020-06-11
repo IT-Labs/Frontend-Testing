@@ -18,7 +18,7 @@ describe('TodoItemComponent', () => {
 
     beforeEach(async(() => {
       TestBed.configureTestingModule({
-        declarations: [ TodoItemComponent ]
+        declarations: [ TodoItemComponent ],
       })
       .compileComponents();
     }));
@@ -32,6 +32,14 @@ describe('TodoItemComponent', () => {
       component.todo = getTodo();
       fixture.detectChanges();
       expect(component).toBeTruthy();
+    });
+
+    it('should render title', () => {
+      component.todo = getTodo();
+
+      fixture.detectChanges();
+
+      expect(document.body.textContent).toContain(component.todo.title);
     });
 
     it('should emit onEdit on clicking Edit btn', () => {

@@ -17,7 +17,7 @@ describe('TodoItem-native', () => {
     // cleanup on exiting
     unmountComponentAtNode(container);
     container.remove();
-    container = null;
+    container = null as any;
   });
 
   const getTodo = () => ({

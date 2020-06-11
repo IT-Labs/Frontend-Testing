@@ -20,7 +20,7 @@ describe('TodoItem', () => {
 
   it('should render correctly', () => {
     const props = getProps();
-    render(<TodoItem  {...props} />)
+    render(<TodoItem  {...props} />);
   });
 
   it('should render todo name', () => {
