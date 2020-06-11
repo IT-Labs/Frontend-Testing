@@ -1,3 +1,5 @@
-<app-todo-item *ngFor="let todo of todos" [todo]="todo" (onEdit)="onEdit.emit($event)"
-  (onRemove)="onRemove.emit($event)">
-</app-todo-item>
+<div>
+  <app-todo-item *ngFor="let todo of todos" [todo]="todo" (onEdit)="onEdit.emit($event)"
+    (onRemove)="onRemove.emit($event)">
+  </app-todo-item>
+</div>

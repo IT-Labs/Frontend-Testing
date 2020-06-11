@@ -1,4 +1,4 @@
-<form (submit)="onSubmit()" [formGroup]="form">
+<form (submit)="onSubmit()" [formGroup]="form" #myForm="ngForm">
   <h2>Update Todo</h2>
   <div>
     <label for="title" >Title</label>
@@ -11,7 +11,7 @@
       />
   </div>
   <div class="error">
-    {{form.get('title').touched && form.get('title').invalid ? 'Field is required' : '' }}
+    {{(form.get('title').touched || myForm.submitted) && form.get('title').invalid  ? 'Field is required' : '' }}
   </div>
   <div>
     <button type="submit">Save</button>

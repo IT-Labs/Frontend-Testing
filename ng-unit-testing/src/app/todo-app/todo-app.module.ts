@@ -22,6 +22,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   exports: [
     TodoAppContainerComponent,
+    TodoAppComponent,
+    TodoListComponent,
+    TodoItemComponent,
+    ChosenTodoFormComponent,
   ]
 })
 export class TodoAppModule { }
