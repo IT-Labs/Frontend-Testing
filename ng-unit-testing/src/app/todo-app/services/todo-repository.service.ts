@@ -9,20 +9,19 @@ const apiUrl = 'http://localhost:3001';
   providedIn: 'root'
 })
 export class TodoRepositoryService {
-
-constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   getTodos(): Observable<Todo[]> {
-  return this.http.get<Todo[]>(apiUrl + '/todos');
-}
+    return this.http.get<Todo[]>(apiUrl + '/todos');
+  }
 
   addTodo(todo: Partial<Todo>): Observable<Todo> {
-  return this.http.post<Todo>(apiUrl + '/todos', todo);;
-}
+    return this.http.post<Todo>(apiUrl + '/todos', todo);;
+  }
 
   updateTodo(id: string, todo: Todo): Observable<Todo> {
-  return this.http.put<Todo>(`${apiUrl}/todos/${id}`, todo);
-}
+    return this.http.put<Todo>(`${apiUrl}/todos/${id}`, todo);
+  }
 
   deleteTodo(id: string): Observable<{}> {
     return this.http.delete<{}>(`${apiUrl}/todos/${id}`);

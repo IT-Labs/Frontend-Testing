@@ -79,8 +79,8 @@ describe.only('TodoAppContainer', () => {
     await act(() => userEvent.type(screen.getByLabelText('Title'), todoTitle));
     fireEvent.click(screen.getByText('Save'));
 
-    await waitForElement(() => screen.getByText(todoTitle));
     expect(mockAddTodo).toHaveBeenCalled();
+    await waitForElement(() => screen.getByText(todoTitle));
     expect(screen.getAllByTestId('todoitem')).toHaveLength(4);
   });
 })

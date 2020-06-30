@@ -43,8 +43,8 @@ describe('TodoAppContainerComponent', () => {
     component: TodoAppContainerComponent,
     imports: [
       CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
+      FormsModule,
+      ReactiveFormsModule,
     ],
     declarations: [
       TodoAppComponent,
@@ -80,5 +80,5 @@ describe('TodoAppContainerComponent', () => {
 
     expect(mockAddTodo).toHaveBeenCalled();
     expect(spectator.queryAll(byTestId('todoitem'))).toHaveLength(4);
-  })
+  });
 });

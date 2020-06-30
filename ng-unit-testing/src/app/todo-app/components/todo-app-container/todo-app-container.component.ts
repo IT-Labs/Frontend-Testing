@@ -12,6 +12,7 @@ export class TodoAppContainerComponent implements OnInit {
   constructor(public todoService: TodoService) { }
 
   ngOnInit() {
+    this.todoService.getAllTodos().subscribe();
   }
 
   handleDelete(todo: Todo) {

@@ -48,6 +48,7 @@ describe('useTodoApp', () => {
   });
 
   it('should render correctly', async () => {
+    // console.log(getTodos);
     renderHook(() => useTodoApp());
     await act(() => Promise.resolve());
   });
@@ -101,6 +102,17 @@ describe('useTodoApp', () => {
 
     expect(result.current.todos).not.toContain(todoToRemove);
     expect(result.current.todos).toHaveLength(currentLength - 1);
+  });
+
+  it('async', async () => {
+    expect.assertions(1);
+
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        expect(1).toBe(1);
+        resolve();
+      }, 0);
+    })
   });
 
   it('should update existing todo', async () => {

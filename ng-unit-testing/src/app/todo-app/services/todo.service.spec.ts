@@ -80,8 +80,13 @@ describe('Service: Todo', () => {
   it('should set initial todos', () => {
     const spectator = createService();
 
+    expect(getTodos(spectator)).toHaveLength(0);
+
+    spectator.service.getAllTodos().subscribe();
+
     expect(getTodos(spectator)).toHaveLength(3);
   });
+
 
   it('should not have chosen item initially', () => {
     const spectator = createService();
@@ -110,6 +115,8 @@ describe('Service: Todo', () => {
 
   it('should remove todo', () => {
     const spectator = createService();
+    spectator.service.getAllTodos().subscribe();
+
     const currentLength = getTodos(spectator).length;
     const todoToRemove = getTodos(spectator)[1];
 
@@ -122,6 +129,7 @@ describe('Service: Todo', () => {
 
   it('should update existing todo', () => {
     const spectator = createService();
+    spectator.service.getAllTodos().subscribe();
     const todoToUpdate = getTodos(spectator)[1];
     const updatedTodo: Todo = {...todoToUpdate, title: 'some changed value'};
     mockUpdateTodo.mockReturnValue(of(updatedTodo));
@@ -137,6 +145,7 @@ describe('Service: Todo', () => {
 
   it('should keep same array index when todo is updated', () => {
     const spectator = createService();
+    spectator.service.getAllTodos().subscribe();
     const todoToUpdate = getTodos(spectator)[1];
     const updatedTodo: Todo = {...todoToUpdate, title: 'some changed value'};
     mockUpdateTodo.mockReturnValue(of(updatedTodo));
@@ -149,6 +158,7 @@ describe('Service: Todo', () => {
 
   it('should clean chosen todo on cancel update', () => {
     const spectator = createService();
+    spectator.service.getAllTodos().subscribe();
     spectator.service.setChosenTodo(getTodos(spectator)[1]);
 
     spectator.service.cancelUpdate();

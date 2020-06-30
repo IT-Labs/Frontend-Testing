@@ -29,7 +29,7 @@ const initialTodos: Todo[] = [
   providedIn: 'root'
 })
 export class TodoService {
-  private _todos = new BehaviorSubject<Todo[]>(initialTodos);
+  private _todos = new BehaviorSubject<Todo[]>([]);
   todos = this._todos.asObservable();
 
   private _chosenTodo = new BehaviorSubject<Todo>(null);
@@ -38,6 +38,15 @@ export class TodoService {
   constructor(
     private todoRepository: TodoRepositoryService,
   ) { }
+
+  getAllTodos() {
+    return this.todoRepository.getTodos()
+      .pipe(
+        tap((res) => {
+          this._todos.next(res);
+        })
+      )
+  }
 
   update(todoToUpdate: Todo) {
     if (!todoToUpdate) {
