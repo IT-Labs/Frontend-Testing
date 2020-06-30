@@ -4,6 +4,31 @@ import { TestBed, async, inject } from '@angular/core/testing';
 import { TodoService } from './todo.service';
 import { Todo } from '../models/Todo';
 import { createServiceFactory, Spectator, SpectatorService } from '@ngneat/spectator/jest';
+import { TodoRepositoryService } from './todo-repository.service';
+import { mockProvider } from '@ngneat/spectator';
+import { of } from 'rxjs';
+import { take } from 'rxjs/operators';
+
+const mockTodos = () => [
+  {
+    "id": "1",
+    "title": "Wash the dishes",
+    "isCompleted": false,
+    "createdAt": "2020-06-02T12:20:56.512Z"
+  },
+  {
+    "id": "2",
+    "title": "Clean your PC",
+    "isCompleted": false,
+    "createdAt": "2020-05-20T12:20:56.512Z"
+  },
+  {
+    "id": "3",
+    "title": "Go biking",
+    "isCompleted": true,
+    "createdAt": "2020-05-10T12:20:56.512Z"
+  }
+];
 
 describe('Service: Todo', () => {
 
@@ -16,7 +41,22 @@ describe('Service: Todo', () => {
     }
   }
 
-  const createService = createServiceFactory(TodoService);
+  const mockUpdateTodo = jest.fn();
+
+  const createService = createServiceFactory({
+    service: TodoService,
+    providers: [
+      mockProvider(TodoRepositoryService, {
+        getTodos: () => of(mockTodos()),
+        deleteTodo: () => of(true),
+        updateTodo: mockUpdateTodo,
+      })
+    ]
+  });
+
+  beforeEach(() => {
+    mockUpdateTodo.mockReset();
+  })
 
   const getTodos = (spectator: SpectatorService<TodoService>) => {
     let todos: Todo[];
@@ -73,7 +113,7 @@ describe('Service: Todo', () => {
     const currentLength = getTodos(spectator).length;
     const todoToRemove = getTodos(spectator)[1];
 
-    spectator.service.remove(todoToRemove);
+    spectator.service.remove(todoToRemove).subscribe();
 
     const todos = getTodos(spectator);
     expect(todos).not.toContain(todoToRemove);
@@ -84,9 +124,10 @@ describe('Service: Todo', () => {
     const spectator = createService();
     const todoToUpdate = getTodos(spectator)[1];
     const updatedTodo: Todo = {...todoToUpdate, title: 'some changed value'};
+    mockUpdateTodo.mockReturnValue(of(updatedTodo));
 
     spectator.service.setChosenTodo(todoToUpdate);
-    spectator.service.update(updatedTodo);
+    spectator.service.update(updatedTodo).subscribe();
 
     const todos = getTodos(spectator);
     expect(todos).not.toContain(todoToUpdate);
@@ -98,9 +139,10 @@ describe('Service: Todo', () => {
     const spectator = createService();
     const todoToUpdate = getTodos(spectator)[1];
     const updatedTodo: Todo = {...todoToUpdate, title: 'some changed value'};
+    mockUpdateTodo.mockReturnValue(of(updatedTodo));
 
     spectator.service.setChosenTodo(todoToUpdate);
-    spectator.service.update(updatedTodo);
+    spectator.service.update(updatedTodo).subscribe();
 
     expect(getTodos(spectator).indexOf(updatedTodo)).toBe(1);
   });

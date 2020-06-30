@@ -4,6 +4,6 @@
   (onAdd)="todoService.onAdd()"
   (onCancelUpdate)="todoService.cancelUpdate()"
   (onEdit)="todoService.setChosenTodo($event)"
-  (onRemove)="todoService.remove($event)"
-  (onUpdate)="todoService.update($event)">
+  (onRemove)="handleDelete($event)"
+  (onUpdate)="handleUpdate($event)">
 </app-todo-app>

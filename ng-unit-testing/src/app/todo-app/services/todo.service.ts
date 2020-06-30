@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Todo } from '../models/Todo';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, empty, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { TodoRepositoryService } from './todo-repository.service';
 
 const initialTodos: Todo[] = [
   {
@@ -33,38 +35,56 @@ export class TodoService {
   private _chosenTodo = new BehaviorSubject<Todo>(null);
   chosenTodo = this._chosenTodo.asObservable();
 
-  constructor() { }
+  constructor(
+    private todoRepository: TodoRepositoryService,
+  ) { }
 
-  update(todo: Todo) {
-    if (!todo) {
-      return;
+  update(todoToUpdate: Todo) {
+    if (!todoToUpdate) {
+      return empty();
     }
 
-    const oldTodos = this._todos.value;
-    const oldTodo = oldTodos.find((t) => t.id === todo.id);
-    if (!oldTodo) {
-      this._todos.next([...oldTodos, todo]);
-      this._chosenTodo.next(null);
-      return;
+    let update$: Observable<Todo>;
+    if (todoToUpdate.id) {
+      update$ = this.todoRepository.updateTodo(todoToUpdate.id, todoToUpdate);
+    } else {
+      update$ = this.todoRepository.addTodo(todoToUpdate);
     }
 
-    const index = oldTodos.indexOf(oldTodo);
-    const updatedTodos = [
-      ...oldTodos,
-    ];
-    updatedTodos[index] = todo;
-    this._todos.next(updatedTodos);
+    return update$.pipe(
+      tap(todo => {
+        const oldTodos = this._todos.value;
+        const oldTodo = oldTodos.find((t) => t.id === todo.id);
+        if (!oldTodo) {
+          this._todos.next([...oldTodos, todo]);
+          this._chosenTodo.next(null);
+          return;
+        }
 
-    this._chosenTodo.next(null);
+        const index = oldTodos.indexOf(oldTodo);
+        const updatedTodos = [
+          ...oldTodos,
+        ];
+        updatedTodos[index] = todo;
+        this._todos.next(updatedTodos);
+
+        this._chosenTodo.next(null);
+      })
+    )
   }
 
   remove(todo: Todo) {
-    const oldTodos = this._todos.value;
-    this._todos.next(oldTodos.filter((t) => t !== todo));
+    return this.todoRepository.deleteTodo(todo.id)
+      .pipe(
+        tap(() => {
+          const oldTodos = this._todos.value;
+          this._todos.next(oldTodos.filter((t) => t !== todo));
 
-    if (this._chosenTodo.value === todo) {
-      this._chosenTodo.next(null);
-    }
+          if (this._chosenTodo.value === todo) {
+            this._chosenTodo.next(null);
+          }
+        })
+      )
   }
 
   cancelUpdate() {
@@ -73,7 +93,7 @@ export class TodoService {
 
   onAdd() {
     this._chosenTodo.next({
-      id: Math.random().toString(),
+      id: '',
       title: '',
       createdAt: new Date().toString(),
       isCompleted: false,
