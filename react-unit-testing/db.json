@@ -1,0 +1,22 @@
+{
+  "todos": [
+    {
+      "id": "1",
+      "title": "Wash the dishes",
+      "isCompleted": false,
+      "createdAt": "2020-06-02T12:20:56.512Z"
+    },
+    {
+      "id": "2",
+      "title": "Clean your PC",
+      "isCompleted": false,
+      "createdAt": "2020-05-20T12:20:56.512Z"
+    },
+    {
+      "id": "3",
+      "title": "Go biking",
+      "isCompleted": true,
+      "createdAt": "2020-05-10T12:20:56.512Z"
+    }
+  ]
+}
