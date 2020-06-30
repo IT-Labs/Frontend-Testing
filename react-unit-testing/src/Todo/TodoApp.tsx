@@ -44,7 +44,7 @@ const TodoApp: React.FC<Props> = ({
     <div className={classes.container}>
       <div className={classes.header}>
         <h1>Todo App</h1>
-        <button onClick={onAdd}>
+        <button onClick={onAdd} data-testid="addBtn">
           Add
         </button>
       </div>
